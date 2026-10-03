@@ -1,0 +1,70 @@
+{
+  "locale": { "en": "English", "ta": "தமிழ்", "kn": "ಕನ್ನಡ" },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "announcements": "Announcements",
+    "books": "Books",
+    "contact": "Contact"
+  },
+  "home": {
+    "churchName": "The Bangalore Bible Students",
+    "tagline": "Studying God's Word together, sharing the hope of His coming Kingdom and rooted in agape Love.",
+    "aboutTitle": "About Us",
+    "aboutBody": "The Bangalore Bible Students are a non-denominational Christian fellowship devoted to the careful study of the entire Bible — Old and New Testaments alike — as the inspired word of God. We accept Jesus Christ as our Redeemer, whose ransom sacrifice opens the way for God's promised Kingdom to bless all the families of the earth. There is no membership to join, no creed to sign, and no clergy to follow: each of us is encouraged to study the Scriptures personally and prove all things for ourselves. Our gatherings are simple, warm, and rooted in prayer and fellowship, and all are welcome to study God's Word together with us.",
+    "locationTitle": "Where We Are",
+    "address": "#49, 2nd Floor, Puttana Building, Ejipura Main Road, Viveknagar, Bengaluru - 560047",
+    "viewMap": "Open in Google Maps",
+    "servicesTeaser": "Watch our latest services and cottage meetings",
+    "announcementsTeaser": "Stay up to date with church announcements",
+    "booksTeaser": "Read and download books in your language",
+    "exploreMore": "Explore"
+  },
+  "verse": {
+    "label": "Scripture",
+    "text": "For the earth shall be filled with the knowledge of the glory of the LORD, as the waters cover the sea.",
+    "ref": "HABAKKUK 2:14"
+  },
+  "services": {
+    "pageTitle": "Services",
+    "visitChannel": "Visit our YouTube channel",
+    "servicesHeading": "Sunday Services",
+    "cottageHeading": "Cottage Meetings",
+    "watchOnYoutube": "Watch on YouTube",
+    "noContent": "No videos added yet.",
+    "searchPlaceholder": "Search by title or preacher",
+    "dateFrom": "From",
+    "dateTo": "To",    "category": "Category",
+    "allCategories": "All categories",    "clearFilters": "Clear filters",
+    "noResults": "No results match your filters."
+  },
+  "announcements": {
+    "pageTitle": "Announcements",
+    "noContent": "No announcements yet.",
+    "serviceTimingsBadge": "Every Sunday",
+    "serviceTimingsStart": "9:00 AM",
+    "serviceTimingsStartLabel": "Service Begins",
+    "serviceTimingsEnd": "12:00 PM",
+    "serviceTimingsEndLabel": "Service Concludes",
+    "serviceTimingsBody": "Bible study, hymns, prayer and a discourse. All are welcome."
+  },
+  "books": {
+    "pageTitle": "Books",
+    "readDownload": "Read / Download",
+    "noContent": "No books added yet."
+  },
+  "footer": {
+    "copyright": "© {year} {churchName}. All rights reserved."
+  },
+  "contact": {
+    "pageTitle": "Contact Us",
+    "intro": "We'd love to hear from you. Reach out any time.",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "addressLabel": "Address",
+    "otherLabel": "Additional Information",
+    "email": "TODO_REPLACE_EMAIL",
+    "phone": "TODO_REPLACE_PHONE",
+    "otherInfo": "TODO_REPLACE_OTHER_INFO"
+  }
+}

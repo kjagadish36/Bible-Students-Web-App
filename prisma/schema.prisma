@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Every content model stores each language explicitly (en/ta/kn) so pages can
+// render any locale without falling back to English.
+
+model Announcement {
+  id          Int      @id @default(autoincrement())
+  titleEn     String
+  titleTa     String
+  titleKn     String
+  bodyEn      String
+  bodyTa      String
+  bodyKn      String
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Book {
+  id            Int      @id @default(autoincrement())
+  titleEn       String
+  titleTa       String
+  titleKn       String
+  descriptionEn String
+  descriptionTa String
+  descriptionKn String
+  language      String // "en" | "ta" | "kn" - primary language of the book itself
+  fileUrl       String // link to the book (PDF/external) - placeholder until real file supplied
+  coverImageUrl String?
+  createdAt     DateTime @default(now())
+}
+
+enum VideoKind {
+  SERVICE
+  COTTAGE_MEETING
+}
+
+// Unified table for all video content (Sunday Services + Cottage Meetings),
+// discriminated by `kind`, so category browsing/counting is a single query.
+model Video {
+  id            Int       @id @default(autoincrement())
+  kind          VideoKind
+  titleEn       String
+  titleTa       String
+  titleKn       String
+  youtubeId     String? // YouTube video ID; required in practice for SERVICE, optional recording for COTTAGE_MEETING
+  preacher      String? // SERVICE only
+  descriptionEn String? // COTTAGE_MEETING only
+  descriptionTa String?
+  descriptionKn String?
+  locationEn    String? // COTTAGE_MEETING only
+  locationTa    String?
+  locationKn    String?
+  category      String? // matches a playlist category name, e.g. "Sunday Worship"
+  videoDate     DateTime
+  createdAt     DateTime @default(now())
+}

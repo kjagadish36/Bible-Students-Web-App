@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- =====================================================================
+     ADMIN DASHBOARD — The Bangalore Bible Students
+     Open this file in a browser. Edit, then:
+       • "Save draft & preview"  → see changes on the site (this browser only)
+       • "Download content.js"   → replace /js/content.js with it to publish
+     ===================================================================== -->
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin · The Bangalore Bible Students</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Nunito+Sans:wght@400;600;700&family=Noto+Sans+Kannada&family=Noto+Sans+Tamil&family=Noto+Sans+Devanagari&display=swap">
+<style>
+:root{--bg:#1C1C1E;--card:#2C2C2F;--line:#3C3C40;--ink:#F2F2F2;--muted:#B8B8BC;--gold:#E6C35C}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 'Nunito Sans','Noto Sans Kannada','Noto Sans Tamil','Noto Sans Devanagari',sans-serif}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#141416;z-index:5}
+h1{font-family:'Playfair Display',serif;color:var(--gold);margin:0;font-size:1.5rem}h2{font-family:'Playfair Display',serif;color:var(--gold)}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;font-weight:700;border:1px solid var(--gold);background:transparent;color:var(--gold);padding:8px 16px;border-radius:6px;cursor:pointer}
+button.p{background:var(--gold);color:#1C1C1E}button.d{border-color:#E8A0AA;color:#E8A0AA}
+nav{display:flex;gap:6px;padding:14px 28px;flex-wrap:wrap}nav button{border-color:var(--line);color:var(--muted)}nav button.on{border-color:var(--gold);color:var(--gold)}
+main{max-width:1100px;margin:auto;padding:10px 28px 60px}section{display:none}section.on{display:block}
+.item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin:14px 0}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+label{display:block;font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:8px}
+input,textarea,select{width:100%;font:inherit;background:#1C1C1E;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:8px 10px}
+textarea{min-height:64px}#raw{min-height:60vh;font-family:Consolas,monospace;font-size:.85rem}
+.ml{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.ml small{color:var(--gold);font-weight:700}
+.head{display:flex;justify-content:space-between;align-items:center}.msg{padding:10px 14px;border-radius:6px;margin:10px 0;display:none}
+.ok{background:#1f3a26;display:block}.bad{background:#4a1f25;display:block}
+@media(max-width:800px){.ml{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<header><h1>✝ Admin Dashboard</h1><div class="btns">
+<button class="p" id="bPreview">Save draft &amp; preview</button>
+<button id="bDownload">Download content.js</button>
+<button class="d" id="bDiscard">Discard draft</button></div></header>
+<nav id="nav"></nav><main><div id="msg" class="msg"></div>
+<section id="s-settings"></section><section id="s-sermons"></section><section id="s-announcements"></section>
+<section id="s-taglines"></section><section id="s-books"></section>
+<section id="s-raw"><h2>Raw data &amp; Health Check</h2><p>Advanced: edit everything as JSON. Press <b>Health Check</b> to find mistakes.</p>
+<button id="bCheck">Health Check &amp; apply</button><p></p><textarea id="raw"></textarea></section>
+</main>
+<script src="../js/content.js"></script><script src="../js/new-sermons.js"></script>
+<script>
+'use strict';
+const L=['en','kn','ta','hi'],LN={en:'English',kn:'ಕನ್ನಡ',ta:'தமிழ்',hi:'हिन्दी'};
+const clone=o=>JSON.parse(JSON.stringify(o));
+let D; try{D=JSON.parse(localStorage.getItem('bbs_draft')||'null')}catch(e){}
+if(!D){D=clone(window.CONTENT);if(Array.isArray(window.NEW_SERMONS))D.sermons=window.NEW_SERMONS.concat(D.sermons)}
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function say(t,ok=true){const m=$('#msg');m.className='msg '+(ok?'ok':'bad');m.textContent=t;clearTimeout(say.t);say.t=setTimeout(()=>m.className='msg',5000)}
+/* field builders – every input carries a data-path like "sermons.0.title.en" */
+const get=p=>p.split('.').reduce((o,k)=>o==null?o:o[k],D);
+function set(p,v){const k=p.split('.'),last=k.pop();let o=D;for(const x of k)o=o[x];o[last]=typeof o[last]==='number'?Number(v):typeof o[last]==='boolean'?v==='true':v}
+const f=(lab,p,type='text')=>`<div><label>${lab}</label>${type==='area'?`<textarea data-p="${p}">${esc(get(p))}</textarea>`:type==='bool'?`<select data-p="${p}"><option ${get(p)?'selected':''}>true</option><option ${!get(p)?'selected':''}>false</option></select>`:`<input type="${type}" data-p="${p}" value="${esc(get(p))}">`}</div>`;
+function ml(lab,p,area){let o=get(p);if(typeof o!=='object'||!o){o={en:o||''};const k=p.split('.'),l=k.pop();k.reduce((a,b)=>a[b],D)[l]=o}
+ L.forEach(x=>{if(o[x]==null)o[x]=''});
+ return `<label>${lab}</label><div class="ml">${L.map(x=>`<div><small>${LN[x]}</small>${area?`<textarea data-p="${p}.${x}">${esc(o[x])}</textarea>`:`<input data-p="${p}.${x}" value="${esc(o[x])}">`}</div>`).join('')}</div>`}
+const blank={sermons:()=>({title:{en:'New sermon',kn:'',ta:'',hi:''},scripture:'',speaker:{en:'',kn:'',ta:'',hi:''},type:'Video',date:new Date().toISOString().slice(0,10),youtube:'',slides:''}),
+ announcements:()=>({date:new Date().toISOString().slice(0,10),title:{en:'New announcement',kn:'',ta:'',hi:''},text:{en:'',kn:'',ta:'',hi:''}}),
+ taglines:()=>({en:'',kn:'',ta:'',hi:''})};
+const tools=(k,i)=>`<div class="btns">${i>0?`<button data-mv="${k},${i},-1">↑</button>`:''}${i<D[k].length-1?`<button data-mv="${k},${i},1">↓</button>`:''}<button class="d" data-del="${k},${i}">Delete</button></div>`;
+const R={
+ settings(){const s='settings';return `<h2>Church settings</h2><div class="item"><div class="row">${f('Church name',s+'.churchName')}${f('Start time',s+'.startTime')}${f('End time',s+'.endTime')}${f('Email',s+'.email')}${f('Phone',s+'.phone')}${f('Google Maps link',s+'.mapLink')}${f('Map embed link',s+'.mapEmbed')}${f('YouTube playlist',s+'.youtubePlaylist')}${f('Max sermons',s+'.maxSermons','number')}${f('Sermons per page',s+'.sermonsPerPage','number')}${f('Demo sermons',s+'.demoSermons','bool')}</div>${ml('Service timings text',s+'.serviceText')}${ml('Address',s+'.address')}</div>`},
+ sermons(){return `<div class="head"><h2>Sermons (${D.sermons.length}) – newest first</h2><button class="p" data-add="sermons">+ Add sermon</button></div>`+D.sermons.map((x,i)=>{const p='sermons.'+i;return `<div class="item"><div class="head"><b>${esc(x.date)} · ${esc(x.title&&x.title.en)}</b>${tools('sermons',i)}</div><div class="row">${f('Date',p+'.date','date')}${f('Scripture',p+'.scripture')}<div><label>Type</label><select data-p="${p}.type">${['Video','Audio','Slides'].map(t=>`<option ${x.type===t?'selected':''}>${t}</option>`).join('')}</select></div>${f('YouTube link',p+'.youtube')}${f('Slides / audio link',p+'.slides')}</div>${ml('Title',p+'.title')}${ml('Speaker',p+'.speaker')}</div>`}).join('')},
+ announcements(){return `<div class="head"><h2>Announcements (${D.announcements.length})</h2><button class="p" data-add="announcements">+ Add announcement</button></div>`+D.announcements.map((x,i)=>{const p='announcements.'+i;return `<div class="item"><div class="head"><b>${esc(x.date)} · ${esc(x.title&&x.title.en)}</b>${tools('announcements',i)}</div><div class="row">${f('Date',p+'.date','date')}</div>${ml('Title',p+'.title')}${ml('Details',p+'.text',1)}</div>`}).join('')},
+ taglines(){return `<div class="head"><h2>Home-page taglines</h2><button class="p" data-add="taglines">+ Add tagline</button></div>`+D.taglines.map((x,i)=>`<div class="item"><div class="head"><b>Tagline ${i+1}</b>${tools('taglines',i)}</div>${ml('Text','taglines.'+i)}</div>`).join('')},
+ books(){return `<h2>Studies in the Scriptures</h2><p>Put each PDF in the <b>/pdfs</b> folder and type its file name below.</p>`+D.books.map((x,i)=>{const p='books.'+i;return `<div class="item"><div class="row">${f('Cover top',p+'.coverTop')}${f('Cover line 1',p+'.coverLine1')}${f('Cover line 2',p+'.coverLine2')}${f('PDF file name',p+'.pdf')}</div>${ml('Title',p+'.title')}${ml('Description',p+'.description',1)}</div>`}).join('')},
+ raw(){$('#raw').value=JSON.stringify(D,null,2);return null}
+};
+let cur='sermons';
+function draw(){$('#nav').innerHTML=['settings','sermons','announcements','taglines','books','raw'].map(k=>`<button class="${k===cur?'on':''}" data-tab="${k}">${k==='raw'?'Raw / Health Check':k[0].toUpperCase()+k.slice(1)}</button>`).join('');
+ document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id==='s-'+cur));const h=R[cur]();if(h!==null)$('#s-'+cur).innerHTML=h}
+document.addEventListener('input',e=>{const p=e.target.dataset.p;if(p)set(p,e.target.value)});
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+ if(d.tab){cur=d.tab;draw()}
+ if(d.add){D[d.add].unshift(blank[d.add]());draw();say('Added at the top – fill in the details.')}
+ if(d.del){const[k,i]=d.del.split(',');if(confirm('Delete this item?')){D[k].splice(+i,1);draw()}}
+ if(d.mv){const[k,i,s]=d.mv.split(',');const a=D[k],j=+i+ +s;[a[i],a[j]]=[a[j],a[i]];draw()}});
+function check(){try{const o=JSON.parse($('#raw').value);for(const k of ['settings','taglines','sermons','announcements','books'])if(!(k in o))throw Error('Missing section: '+k);D=o;say('✓ Health Check passed – changes applied.');return true}catch(e){say('✗ '+e.message,false);return false}}
+$('#bCheck').onclick=check;
+$('#bPreview').onclick=()=>{if(cur==='raw'&&!check())return;localStorage.setItem('bbs_draft',JSON.stringify(D));say('Draft saved. Opening preview…');window.open('../index.html','_blank')};
+$('#bDiscard').onclick=()=>{if(!confirm('Discard all unpublished changes?'))return;localStorage.removeItem('bbs_draft');D=clone(window.CONTENT);if(Array.isArray(window.NEW_SERMONS))D.sermons=window.NEW_SERMONS.concat(D.sermons);draw();say('Draft discarded.')};
+$('#bDownload').onclick=()=>{if(cur==='raw'&&!check())return;const txt=HDR+'window.CONTENT = '+JSON.stringify(D,null,2)+';\n';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/javascript'}));a.download='content.js';a.click();say('Downloaded. Replace js/content.js with it, and empty js/new-sermons.js.')};
+const HDR="/* =====================================================================\n   CONTENT FILE \u2014 THE ONLY FILE MOST EDITORS NEED TO CHANGE\n   ---------------------------------------------------------------------\n   Everything that changes week to week lives here:\n     settings       \u2192 service times, address, map link, email, phone\n     taglines       \u2192 rotating lines under the church name (home page)\n     sermons        \u2192 YouTube / audio / slides list (newest first)\n     announcements  \u2192 news & events\n     books          \u2192 Studies in the Scriptures (PDFs go in the /pdfs folder)\n\n   EASIEST WAY TO EDIT: open  admin/index.html , make changes, then press\n   \"Download content.js\" and replace this file with the downloaded one.\n\n   EDITING BY HAND:\n   \u2022 Text that appears in 4 languages is written like\n        { \"en\": \"English\", \"kn\": \"\u0c95\u0ca8\u0ccd\u0ca8\u0ca1\", \"ta\": \"\u0ba4\u0bae\u0bbf\u0bb4\u0bcd\", \"hi\": \"\u0939\u093f\u0928\u094d\u0926\u0940\" }\n     If a language is left empty, the English text is shown instead.\n   \u2022 Dates use the format \"YYYY-MM-DD\" (e.g. \"2026-10-04\").\n   \u2022 youtube: paste the full YouTube link, e.g. \"https://youtu.be/abc123XYZ\".\n   \u2022 Keep the commas between items. If the site goes blank after an edit,\n     a missing comma or quote is the usual cause \u2013 open admin/index.html,\n     the Health Check will point it out.\n   \u2022 settings.demoSermons = true fills the list with 100 sample sermons so\n     you can see the page numbers. SET IT TO false WHEN REAL SERMONS ARE ADDED.\n   ===================================================================== */\n\n";
+draw();
+</script></body></html>

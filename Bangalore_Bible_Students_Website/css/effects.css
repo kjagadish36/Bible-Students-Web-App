@@ -1,0 +1,60 @@
+/* =====================================================================
+   EFFECTS & ANIMATIONS
+   Moving images, hover zoom, gold headings, Visit-Us language fonts,
+   floating gold dust, HD logo and golden confetti.
+   Loaded AFTER style.css so these settings win.
+   Hover zoom strength:  .photo:hover img{scale:1.22}  (1 = no zoom)
+   ===================================================================== */
+/* ===== v18 ===== */
+@keyframes kenC{0%{transform:scale(1.06) translate(0,0)}50%{transform:scale(1.18) translate(-2.5%,1%)}100%{transform:scale(1.08) translate(2%,-1%)}}
+.banner-img,.verse-band .banner-img,.page .banner-img{background-position:center!important;animation:kenC 22s ease-in-out infinite alternate!important;will-change:transform}
+.photo{overflow:hidden!important;position:relative}
+.photo img{object-fit:cover!important;animation:kenC 18s ease-in-out infinite alternate!important;will-change:transform}
+/* gentle hover zoom, no brightness change */
+.photo img,.banner-img{scale:1;transition:scale .9s cubic-bezier(.2,.8,.2,1)}
+.photo:hover img{scale:1.22}.banner:hover .banner-img,.verse-band:hover .banner-img{scale:1.12}
+.feature,.value,.sermon{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.feature:hover,.value:hover,.sermon:hover{transform:translateY(-10px) scale(1.05)!important}
+.sermon:hover .thumb{scale:1.15}.book:hover{transform:translateY(-8px) scale(1.04)}
+/* gold headings */
+.label,footer h4{color:#C9A227!important;font-weight:800!important}
+[data-theme=dark] .label,[data-theme=dark] footer h4{color:#E6C35C!important}
+footer a,footer p{font-size:.92rem!important}
+/* NEW animation 1: floating golden dust over every banner */
+.banner:before,.verse-band:before{content:"";position:absolute;inset:-50% 0 0;z-index:1;pointer-events:none;
+ background-image:radial-gradient(2px 2px at 10% 80%,#F6D27A,transparent),radial-gradient(1.5px 1.5px at 25% 60%,#fff,transparent),radial-gradient(2px 2px at 40% 90%,#F6D27A,transparent),radial-gradient(1.5px 1.5px at 55% 70%,#fff,transparent),radial-gradient(2.5px 2.5px at 70% 85%,#F6D27A,transparent),radial-gradient(1.5px 1.5px at 85% 65%,#fff,transparent),radial-gradient(2px 2px at 95% 95%,#F6D27A,transparent);
+ background-size:100% 50%;animation:dustUp 14s linear infinite;opacity:.85}
+.verse-band{position:relative;overflow:hidden}
+@keyframes dustUp{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+/* NEW animation 2: gold cross line draws in + cross gently rotates */
+.banner .cross-line:before,.banner .cross-line:after{animation:lineDraw 1.6s ease-out both}
+@keyframes lineDraw{from{width:0}to{width:90px}}
+/* Visit Us language cards – proper native fonts */
+.time-langs div{transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .45s}
+.time-langs div:hover{transform:translateY(-8px);border-color:#C9A227}
+.time-langs b{display:block;color:#C9A227!important;font-weight:700!important;font-size:1.55rem!important;margin-bottom:10px;line-height:1.4}
+[data-theme=dark] .time-langs b{color:#E6C35C!important}
+.time-langs p{font-weight:400!important;font-size:1.08rem!important;line-height:1.75}
+.time-langs div:nth-child(1) b{font-family:'Playfair Display',Georgia,serif!important;letter-spacing:.5px}
+.time-langs div:nth-child(1) p{font-family:'Lora',Georgia,serif!important}
+.time-langs div:nth-child(2) b{font-family:'Noto Serif Kannada',serif!important}
+.time-langs div:nth-child(2) p{font-family:'Noto Sans Kannada',sans-serif!important}
+.time-langs div:nth-child(3) b{font-family:'Noto Serif Tamil',serif!important}
+.time-langs div:nth-child(3) p{font-family:'Noto Sans Tamil',sans-serif!important}
+.time-langs div:nth-child(4) b{font-family:'Noto Serif Devanagari',serif!important}
+.time-langs div:nth-child(4) p{font-family:'Noto Sans Devanagari',sans-serif!important}
+@media(prefers-reduced-motion:reduce){.photo img,.banner:before,.verse-band:before{animation:none!important}}
+/* ===== v19: HD / brighter logo + golden confetti burst ===== */
+.brand svg,.logo-wrap .logo{shape-rendering:geometricPrecision;image-rendering:-webkit-optimize-contrast;
+ filter:brightness(1.12) contrast(1.12) saturate(1.25) drop-shadow(0 0 3px rgba(246,210,122,.55)) drop-shadow(0 3px 6px rgba(0,0,0,.25))!important}
+.brand svg,.brand img{width:68px!important;height:68px!important}
+.logo-wrap{overflow:visible!important}
+.gconf{position:absolute;left:50%;top:50%;width:7px;height:7px;pointer-events:none;z-index:5;border-radius:1px;
+ animation:gconf 1.6s cubic-bezier(.15,.7,.3,1) forwards}
+.gconf.s{border-radius:0;width:9px;height:9px;background:none!important;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%)}
+@keyframes gconf{0%{transform:translate(-50%,-50%) scale(.3) rotate(0);opacity:1}
+ 70%{opacity:1}100%{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1) rotate(var(--r));opacity:0}}
+@media(prefers-reduced-motion:reduce){.gconf{display:none}}
+/* v20: larger "The Bangalore" */
+.brand .wordmark small{font-size:.95rem!important;letter-spacing:3px!important}
+@media(max-width:900px){.brand .wordmark small{font-size:.82rem!important;letter-spacing:2.5px!important}}
