@@ -59,6 +59,7 @@ export function SiteHeader() {
   const links = [
     { href: "/", label: t("home") },
     { href: "/services", label: t("services") },
+    { href: "/devotion", label: t("devotion") },
     { href: "/announcements", label: t("announcements") },
     { href: "/books", label: t("books") },
     { href: "/contact", label: t("contact") },

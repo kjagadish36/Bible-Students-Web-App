@@ -3,6 +3,7 @@
   "nav": {
     "home": "Home",
     "services": "Services",
+    "devotion": "Devotion",
     "announcements": "Announcements",
     "books": "Books",
     "contact": "Contact"
@@ -52,6 +53,22 @@
     "pageTitle": "Books",
     "readDownload": "Read / Download",
     "noContent": "No books added yet."
+  },
+  "devotion": {
+    "pageTitle": "Daily Devotion",
+    "today": "Today",
+    "dateLabel": "Choose a date",
+    "goLabel": "Go",
+    "prev": "Previous Day",
+    "next": "Next Day",
+    "mannaLabel": "Daily Heavenly Manna",
+    "songsnightLabel": "Songs in the Night",
+    "promisesLabel": "Precious Promises",
+    "noContent": "No devotion available for this date in this language.",
+    "sourceLabel": "Source",
+    "sourceLinkText": "bibleresources.info",
+    "classicReadingsTitle": "Morning Devotions",
+    "classicReadingsNote": "Time-honored devotional readings (English only), the same every day."
   },
   "footer": {
     "copyright": "© {year} {churchName}. All rights reserved."

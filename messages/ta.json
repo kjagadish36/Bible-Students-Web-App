@@ -3,6 +3,7 @@
   "nav": {
     "home": "முகப்பு",
     "services": "ஆராதனைகள்",
+    "devotion": "தியானம்",
     "announcements": "அறிவிப்புகள்",
     "books": "புத்தகங்கள்",
     "contact": "தொடர்பு"
@@ -54,6 +55,22 @@
     "pageTitle": "புத்தகங்கள்",
     "readDownload": "படிக்க / பதிவிறக்க",
     "noContent": "இதுவரை புத்தகங்கள் சேர்க்கப்படவில்லை."
+  },
+  "devotion": {
+    "pageTitle": "நாளாந்த தியானம்",
+    "today": "இன்று",
+    "dateLabel": "தேதியைத் தேர்ந்தெடுக்கவும்",
+    "goLabel": "செல்",
+    "prev": "முந்தைய நாள்",
+    "next": "அடுத்த நாள்",
+    "mannaLabel": "அநுதின பரலோக மன்னா",
+    "songsnightLabel": "இரவின் இனிய கீதங்கள்",
+    "promisesLabel": "அருமையான வாக்குத்தத்தங்கள்",
+    "noContent": "இந்த மொழியில் இந்த தேதிக்கான தியானம் இல்லை.",
+    "sourceLabel": "மூலம்",
+    "sourceLinkText": "bibleresources.info",
+    "classicReadingsTitle": "காலை தியானங்கள்",
+    "classicReadingsNote": "ஒவ்வொரு நாளும் ஒரே மாதிரியான, காலத்தால் மதிக்கப்பட்ட தியான வாசிப்புகள் (ஆங்கிலத்தில் மட்டும்)."
   },
   "footer": {
     "copyright": "© {year} {churchName}. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை."

@@ -3,6 +3,7 @@
   "nav": {
     "home": "ಮುಖಪುಟ",
     "services": "ಆರಾಧನೆಗಳು",
+    "devotion": "ಧ್ಯಾನ",
     "announcements": "ಪ್ರಕಟಣೆಗಳು",
     "books": "ಪುಸ್ತಕಗಳು",
     "contact": "ಸಂಪರ್ಕಿಸಿ"
@@ -54,6 +55,22 @@
     "pageTitle": "ಪುಸ್ತಕಗಳು",
     "readDownload": "ಓದಿ / ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
     "noContent": "ಇನ್ನೂ ಯಾವುದೇ ಪುಸ್ತಕಗಳನ್ನು ಸೇರಿಸಿಲ್ಲ."
+  },
+  "devotion": {
+    "pageTitle": "ದೈನಂದಿನ ಧ್ಯಾನ",
+    "today": "ಇಂದು",
+    "dateLabel": "ದಿನಾಂಕವನ್ನು ಆರಿಸಿ",
+    "goLabel": "ಹೋಗು",
+    "prev": "ಹಿಂದಿನ ದಿನ",
+    "next": "ಮುಂದಿನ ದಿನ",
+    "mannaLabel": "ಅನುದಿನ ಪರಲೋಕ ಮನ್ನಾ",
+    "songsnightLabel": "ರಾತ್ರಿಯ ಗೀತೆಗಳು",
+    "promisesLabel": "ಅಮೂಲ್ಯ ವಾಗ್ದಾನಗಳು",
+    "noContent": "ಈ ಭಾಷೆಯಲ್ಲಿ ಈ ದಿನಾಂಕಕ್ಕೆ ಧ್ಯಾನ ಲಭ್ಯವಿಲ್ಲ.",
+    "sourceLabel": "ಮೂಲ",
+    "sourceLinkText": "bibleresources.info",
+    "classicReadingsTitle": "ಬೆಳಗಿನ ಧ್ಯಾನಗಳು",
+    "classicReadingsNote": "ಪ್ರತಿದಿನವೂ ಒಂದೇ ರೀತಿಯ, ಕಾಲಾತೀತ ಧ್ಯಾನ ಓದುಗಳು (ಇಂಗ್ಲಿಷ್ ಮಾತ್ರ)."
   },
   "footer": {
     "copyright": "© {year} {churchName}. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ."
