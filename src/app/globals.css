@@ -26,8 +26,8 @@
 }
 
 html.dark {
-  --background: #050d1a;
-  --foreground: #f6f1e8;
+  --background: #121212;
+  --foreground: #f1ede6;
   color-scheme: dark;
 
   --color-brand-950: #f8fbff;
@@ -35,8 +35,8 @@ html.dark {
   --color-brand-800: #dfeaff;
   --color-brand-700: #bfd1ff;
   --color-brand-600: #9ab7ff;
-  --color-brand-100: #122033;
-  --color-brand-50: #0d1728;
+  --color-brand-100: #1e1e1e;
+  --color-brand-50: #181818;
 
   --color-gold-700: #f3d48b;
   --color-gold-600: #f5d88b;
@@ -79,29 +79,26 @@ body {
 }
 
 html.dark body {
-  background:
-    radial-gradient(circle at top, rgba(247, 217, 138, 0.18), transparent 26%),
-    radial-gradient(circle at bottom left, rgba(49, 87, 168, 0.26), transparent 35%),
-    linear-gradient(180deg, #050d1a 0%, #0c1830 100%);
+  background: #121212;
 }
 
 html.dark .glass-panel {
-  background: rgba(10, 18, 30, 0.7);
+  background: rgba(20, 20, 20, 0.7);
   border-color: rgba(255, 214, 122, 0.2);
-  box-shadow: 0 0 0 1px rgba(255, 214, 122, 0.08), 0 18px 40px rgba(3, 7, 18, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 1px rgba(255, 214, 122, 0.08), 0 18px 40px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(18px);
 }
 
 html.dark [class*="bg-brand-900"] {
-  background-color: rgba(15, 23, 38, 0.96) !important;
+  background-color: rgba(24, 24, 24, 0.96) !important;
 }
 
 html.dark [class*="bg-brand-50"] {
-  background-color: rgba(17, 30, 46, 0.82) !important;
+  background-color: rgba(26, 26, 26, 0.82) !important;
 }
 
 html.dark [class*="bg-brand-950"] {
-  background-color: rgba(4, 11, 20, 0.98) !important;
+  background-color: rgba(14, 14, 14, 0.98) !important;
 }
 
 html.dark [class*="text-brand-900"],
@@ -133,15 +130,15 @@ html.dark select {
 }
 
 html.dark select option {
-  background-color: #0f1726;
+  background-color: #1a1a1a;
   color: rgba(246, 241, 232, 0.96);
 }
 
 html.dark .hero-glow {
   background:
     radial-gradient(circle at 50% 18%, rgba(248, 221, 154, 0.25), transparent 18%),
-    radial-gradient(circle at 30% 35%, rgba(117, 155, 255, 0.18), transparent 30%),
-    linear-gradient(180deg, rgba(9, 15, 25, 0.96), rgba(12, 24, 48, 0.96));
+    radial-gradient(circle at 30% 35%, rgba(140, 140, 140, 0.15), transparent 30%),
+    linear-gradient(180deg, rgba(14, 14, 14, 0.96), rgba(20, 20, 20, 0.96));
 }
 
 html.dark .hero-grid {
