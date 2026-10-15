@@ -28,7 +28,9 @@ export default async function AdminBooksPage() {
           >
             <div>
               <p className="font-medium text-brand-900">{book.titleEn}</p>
-              <p className="text-sm text-brand-800/60">{book.language} · {book.fileUrl}</p>
+              <p className="text-sm text-brand-800/60">
+                {book.language} · {book.category ?? "No category"} · {book.fileUrl}
+              </p>
             </div>
             <div className="flex items-center gap-2">
               <Link

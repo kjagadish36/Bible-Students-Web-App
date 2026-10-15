@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { TextField, TextAreaField } from "@/components/admin/form-fields";
 import { BlobUploadField } from "@/components/admin/blob-upload-field";
+import { CategorySelectField } from "@/components/admin/category-select-field";
+import { BOOK_CATEGORIES } from "@/lib/book-categories";
 import { updateBook } from "../../actions";
 
 export default async function EditBookPage({
@@ -52,6 +54,13 @@ export default async function EditBookPage({
             <option value="kn">Kannada</option>
           </select>
         </label>
+
+        <CategorySelectField
+          label="Category (optional)"
+          name="category"
+          defaultValue={book.category ?? ""}
+          options={BOOK_CATEGORIES}
+        />
 
         <BlobUploadField
           label="Upload a new book file (PDF or EPUB, up to 50MB, optional)"

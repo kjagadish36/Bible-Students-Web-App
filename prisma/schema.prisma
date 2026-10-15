@@ -39,6 +39,7 @@ model Book {
   language      String // "en" | "ta" | "kn" - primary language of the book itself
   fileUrl       String // link to the book (PDF/external) - placeholder until real file supplied
   coverImageUrl String?
+  category      String? // matches a name in BOOK_CATEGORIES, e.g. "Studies in the Scriptures"
   createdAt     DateTime @default(now())
 }
 

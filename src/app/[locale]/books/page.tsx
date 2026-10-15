@@ -1,14 +1,19 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { BookOpen, Download } from "lucide-react";
-import { getCachedBooksPage } from "@/lib/cached-content";
+import { getCachedBooksPage, getCachedBookCategoryCounts } from "@/lib/cached-content";
 import { localized, type Locale } from "@/lib/localize";
 import { Pagination } from "@/components/pagination";
+import { CategoryTabs } from "@/components/category-tabs";
 
 const PAGE_SIZE = 15;
 
 function parsePage(value: string | string[] | undefined): number {
   const page = Number(Array.isArray(value) ? value[0] : value);
   return Number.isInteger(page) && page > 0 ? page : 1;
+}
+
+function parseParam(value: string | string[] | undefined): string {
+  return (Array.isArray(value) ? value[0] : value) ?? "";
 }
 
 export default async function BooksPage({
@@ -24,8 +29,12 @@ export default async function BooksPage({
   const t = await getTranslations("books");
 
   const page = parsePage(sp.page);
+  const category = parseParam(sp.category);
 
-  const [total, books] = await getCachedBooksPage((page - 1) * PAGE_SIZE, PAGE_SIZE);
+  const [[total, books], categoryCounts] = await Promise.all([
+    getCachedBooksPage((page - 1) * PAGE_SIZE, PAGE_SIZE, category),
+    getCachedBookCategoryCounts(),
+  ]);
 
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
@@ -37,8 +46,17 @@ export default async function BooksPage({
       </section>
 
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
+        <CategoryTabs
+          basePath="/books"
+          searchParams={sp}
+          total={categoryCounts.total}
+          counts={categoryCounts.counts}
+          activeCategory={category}
+          allLabel={t("allCategories")}
+        />
+
         {books.length === 0 ? (
-          <p className="text-brand-800/60">{t("noContent")}</p>
+          <p className="text-brand-800/60">{category ? t("noResults") : t("noContent")}</p>
         ) : (
           <>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -64,6 +82,11 @@ export default async function BooksPage({
                       <h2 className="font-serif font-semibold text-brand-900">
                         {localized(book, "title", locale as Locale)}
                       </h2>
+                      {book.category && (
+                        <p className="mt-1 text-xs font-medium uppercase tracking-wide text-gold-700">
+                          {book.category}
+                        </p>
+                      )}
                     </div>
                     <a
                       className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-gold-500 px-4 py-1.5 text-sm font-semibold text-gold-700 transition hover:bg-gold-500 hover:text-white"

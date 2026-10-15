@@ -6,13 +6,38 @@ import { prisma } from "@/lib/prisma";
 const REVALIDATE_SECONDS = 60;
 
 export const getCachedBooksPage = unstable_cache(
-  async (skip: number, take: number) => {
+  async (skip: number, take: number, category: string = "") => {
+    const where: Record<string, unknown> = {};
+    if (category) where.category = category;
     return Promise.all([
-      prisma.book.count(),
-      prisma.book.findMany({ orderBy: { createdAt: "desc" }, skip, take }),
+      prisma.book.count({ where }),
+      prisma.book.findMany({ where, orderBy: { createdAt: "desc" }, skip, take }),
     ]);
   },
   ["books-list"],
+  { revalidate: REVALIDATE_SECONDS, tags: ["books"] },
+);
+
+// Per-category book counts for the Books page category tabs, plus the overall
+// total so an "All" tab can show a grand total (mirrors getCachedCategoryCounts).
+export const getCachedBookCategoryCounts = unstable_cache(
+  async () => {
+    const [grouped, total] = await Promise.all([
+      prisma.book.groupBy({
+        by: ["category"],
+        where: { category: { not: null } },
+        _count: true,
+        orderBy: { category: "asc" },
+      }),
+      prisma.book.count(),
+    ]);
+    const counts = grouped
+      .filter((row) => row.category)
+      .map((row) => ({ name: row.category as string, count: row._count }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    return { total, counts };
+  },
+  ["book-category-counts"],
   { revalidate: REVALIDATE_SECONDS, tags: ["books"] },
 );
 

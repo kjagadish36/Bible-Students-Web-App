@@ -22,6 +22,7 @@ function readFields(formData: FormData) {
     language: String(formData.get("language")),
     fileUrl: String(formData.get("fileUrl") || ""),
     coverImageUrl: String(formData.get("coverImageUrl") || "") || null,
+    category: String(formData.get("category") || "") || null,
   };
 }
 

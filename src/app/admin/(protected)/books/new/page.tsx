@@ -1,5 +1,7 @@
 import { TextField, TextAreaField } from "@/components/admin/form-fields";
 import { BlobUploadField } from "@/components/admin/blob-upload-field";
+import { CategorySelectField } from "@/components/admin/category-select-field";
+import { BOOK_CATEGORIES } from "@/lib/book-categories";
 import { createBook } from "../actions";
 
 export default function NewBookPage() {
@@ -27,6 +29,8 @@ export default function NewBookPage() {
             <option value="kn">Kannada</option>
           </select>
         </label>
+
+        <CategorySelectField label="Category (optional)" name="category" options={BOOK_CATEGORIES} />
 
         <BlobUploadField
           label="Upload book file (PDF or EPUB, up to 50MB)"

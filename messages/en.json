@@ -55,7 +55,9 @@
   "books": {
     "pageTitle": "Books",
     "readDownload": "Read / Download",
-    "noContent": "No books added yet."
+    "noContent": "No books added yet.",
+    "allCategories": "All categories",
+    "noResults": "No books match this category."
   },
   "devotion": {
     "pageTitle": "Daily Devotion",
