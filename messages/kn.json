@@ -1,5 +1,8 @@
 {
   "locale": { "en": "English", "ta": "தமிழ்", "kn": "ಕನ್ನಡ" },
+  "common": {
+    "scrollToTop": "ಮೇಲಕ್ಕೆ ಹೋಗಿ"
+  },
   "nav": {
     "home": "ಮುಖಪುಟ",
     "services": "ಆರಾಧನೆಗಳು",

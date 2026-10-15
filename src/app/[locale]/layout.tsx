@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ScrollToTopButton } from "@/components/scroll-to-top-button";
 import "../globals.css";
 
 const nunitoSans = Nunito_Sans({
@@ -69,6 +70,7 @@ export default async function LocaleLayout({
           <SiteHeader />
           <main className="flex-1">{children}</main>
           <SiteFooter />
+          <ScrollToTopButton />
         </NextIntlClientProvider>
       </body>
     </html>
