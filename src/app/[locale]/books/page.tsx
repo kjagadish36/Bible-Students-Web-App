@@ -89,7 +89,7 @@ export default async function BooksPage({
                       )}
                     </div>
                     <a
-                      className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-gold-500 px-4 py-1.5 text-sm font-semibold text-gold-700 transition hover:bg-gold-500 hover:text-white"
+                      className="book-download-btn mt-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-gold-500 px-4 py-1.5 text-sm font-semibold text-gold-700 transition hover:bg-gold-500 hover:text-brand-950"
                       href={book.fileUrl}
                       target="_blank"
                       rel="noreferrer"

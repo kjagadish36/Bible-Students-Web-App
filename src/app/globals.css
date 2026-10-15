@@ -120,6 +120,12 @@ html.dark [class*="text-gold-400"] {
   color: #f7d98a !important;
 }
 
+/* The gold-700 rule above matches on the raw class string, so it still forces gold
+   text even while hovering; a higher-specificity selector wins back dark ink here. */
+html.dark .book-download-btn:hover {
+  color: #0d1526 !important;
+}
+
 html.dark .gold-glow {
   box-shadow: 0 0 0 1px rgba(248, 221, 154, 0.24), 0 12px 30px rgba(248, 221, 154, 0.18), 0 0 42px rgba(248, 221, 154, 0.12);
 }
